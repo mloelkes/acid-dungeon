@@ -11,6 +11,7 @@ function setup() {
 
 function draw() {
     game.draw();
+    noLoop();
 }
 
 function keyPressed() {
@@ -29,4 +30,5 @@ function keyPressed() {
     if (keyCode === 40) {
         game.player.moveDown();
     }
+    game.draw();
 }

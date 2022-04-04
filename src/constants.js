@@ -1,3 +1,3 @@
-const WIDTH = 1000;
+const WIDTH = 640;
 const HEIGHT = WIDTH;
-const SQUARE_SIDE = WIDTH / 10;
+const CELL = 32;
