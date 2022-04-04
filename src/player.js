@@ -1,10 +1,12 @@
 class Player {
-    constructor(map) {
+    constructor(map, treasure) {
 
         this.map = map;
-        this.col = 64;
-        this.row = 64;
+        this.treasure = treasure;
+        this.col = 288;
+        this.row = 288;
         this.image = '../assets/icons/MORIC023.PNG';
+        this.points = 0;
 
         this.moveUpPossible = false;
         this.moveDownPossible = false;
@@ -23,14 +25,16 @@ class Player {
             this.row -= CELL;
 
             this.checkPossibleMoves();
+            this.collide();
         }
     }
 
     moveDown() {
         if (this.moveDownPossible) {
-        this.row += CELL;
+            this.row += CELL;
 
-        this.checkPossibleMoves();
+            this.checkPossibleMoves();
+            this.collide();
         }
     }
 
@@ -39,6 +43,7 @@ class Player {
             this.col -= CELL;
 
             this.checkPossibleMoves();
+            this.collide();
         }
     }
 
@@ -48,13 +53,33 @@ class Player {
             this.col += CELL;
 
             this.checkPossibleMoves();
+            this.collide();
         }
     }
 
     checkPossibleMoves() {
-      this.moveUpPossible = this.map[this.row / CELL - 1][this.col / CELL] === 'path';
-      this.moveDownPossible = this.map[this.row / CELL + 1][this.col / CELL] === 'path';
-      this.moveLeftPossible = this.map[this.row / CELL][this.col / CELL - 1] === 'path';
-      this.moveRightPossible = this.map[this.row / CELL][this.col / CELL + 1] === 'path';
+        this.moveUpPossible = this.map[this.row / CELL - 1][this.col / CELL] === 'path';
+        this.moveDownPossible = this.map[this.row / CELL + 1][this.col / CELL] === 'path';
+        this.moveLeftPossible = this.map[this.row / CELL][this.col / CELL - 1] === 'path';
+        this.moveRightPossible = this.map[this.row / CELL][this.col / CELL + 1] === 'path';
   }
+
+  collide() {
+        if (dist(this.col, this.row, this.treasure.col, this.treasure.row) < 32) {
+            this.treasure.removeTreasure();
+            this.incrementCounter();
+            this.playSound('find-sound')
+        }
+    }
+
+    incrementCounter() {
+        this.points += 100;
+        console.log(COUNTER);
+        COUNTER.innerHTML = this.points;
+    }
+
+    playSound(soundId) {
+        let soundElement = document.getElementById(soundId);
+        soundElement.play();
+    }
 }

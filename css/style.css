@@ -14,7 +14,21 @@ body {
     font-size: 26px;
 }
 
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    
+}
 
+.header-left {
+}
+
+.header-center {
+}
+
+.header-right {
+}
 
 #canvas {
 
