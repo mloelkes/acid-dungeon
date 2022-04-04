@@ -3,6 +3,8 @@ class Game {
         this.map = this.createMap();
         this.wall = new Wall();
         this.player = new Player(this.map);
+        this.startSound = document.getElementById("start-sound");
+        this.startSound.play();
     }
 
     preload() {

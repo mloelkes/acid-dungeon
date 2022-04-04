@@ -7,6 +7,8 @@ function preload() {
 function setup() {
     let canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent("canvas");
+    const startSound = document.getElementById("start-sound");
+    startSound.play();
 }
 
 function draw() {
