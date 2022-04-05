@@ -34,5 +34,6 @@ function keyPressed(event) {
         event.preventDefault();
         game.player.moveDown();
     }
+    
     game.draw();
 }

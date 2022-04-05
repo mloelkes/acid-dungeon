@@ -1,7 +1,7 @@
 class Player {
-    constructor(map, treasure, wall) {
+    constructor(card, treasure, wall) {
 
-        this.map = map;
+        this.card = card;
         this.treasure = treasure;
         this.wall = wall;
         this.col = 9;
@@ -28,7 +28,9 @@ class Player {
                 this.row -= 1;
 
             } else {
-                this.moveElements(0, -1);
+                this.moveIndex(-1, 0);
+                this.moveWall();
+                this.moveTreasure(-1, 0);
             }
 
             this.checkPossibleMoves();
@@ -43,7 +45,9 @@ class Player {
                 this.row += 1;
 
             } else {
-                this.moveElements(0, 1);
+                this.moveIndex(1, 0);
+                this.moveWall();
+                this.moveTreasure(1, 0);
             }
 
             this.checkPossibleMoves();
@@ -58,7 +62,9 @@ class Player {
                 this.col -= 1;
 
             } else {
-                this.moveElements(-1, 0);
+                this.moveIndex(0, -1);
+                this.moveWall();
+                this.moveTreasure(0, -1);
             }
 
             this.checkPossibleMoves();
@@ -67,14 +73,15 @@ class Player {
     }
 
     moveRight() {
-        
         if (this.moveRightPossible) {
 
             if (this.col < 17) {
                 this.col += 1;
 
             } else {
-                this.moveElements(1, 0);
+                this.moveIndex(0, 1);
+                this.moveWall();
+                this.moveTreasure(0, 1);
             }
 
             this.checkPossibleMoves();
@@ -83,10 +90,10 @@ class Player {
     }
 
     checkPossibleMoves() {
-        this.moveUpPossible = this.map[(this.row + this.wall.col - 1)][this.col + this.wall.row] === 'path';
-        this.moveDownPossible = this.map[(this.row + this.wall.col + 1)][this.col + this.wall.row] === 'path';
-        this.moveLeftPossible = this.map[this.row + this.wall.col][(this.col + this.wall.row - 1)] === 'path';
-        this.moveRightPossible = this.map[this.row + this.wall.col][(this.col + this.wall.row + 1)] === 'path';
+        this.moveUpPossible = this.card.index[(this.row + this.card.startY - 1)][this.col + this.card.startX] === 'path';
+        this.moveDownPossible = this.card.index[(this.row + this.card.startY + 1)][this.col + this.card.startX] === 'path';
+        this.moveLeftPossible = this.card.index[this.row + this.card.startY][(this.col + this.card.startX - 1)] === 'path';
+        this.moveRightPossible = this.card.index[this.row + this.card.startY][(this.col + this.card.startX + 1)] === 'path';
   }
 
   collide() {
@@ -107,16 +114,16 @@ class Player {
         soundElement.play();
     }
 
-    moveElements(x, y) {
-        this.moveWall(x, y);
-        this.moveTreasure(x, y);
+    moveIndex(y, x) {
+        this.card.startX += x;
+        this.card.startY += y;
     }
 
-    moveWall(x, y) {
-        this.wall.moveWall(x, y);
+    moveWall() {
+        this.wall.moveWall();
     }
 
-    moveTreasure(x, y) {
-        this.treasure.moveTreasure(x, y);
+    moveTreasure(y, x) {
+        this.treasure.moveTreasure(y, x);
     }
 }

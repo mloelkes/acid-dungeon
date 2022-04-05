@@ -1,8 +1,8 @@
 class Treasure {
-    constructor(image, y, x, wall) {
-        this.wall = wall;
-        this.col = x - this.wall.row;
-        this.row = y - this.wall.col;
+    constructor(image, y, x, card) {
+        this.card = card;
+        this.row = y - this.card.startY;
+        this.col = x - this.card.startX;
         this.image = image;
     }
 
@@ -10,15 +10,9 @@ class Treasure {
         image(this.image, this.col * 32, this.row * 32, CELL, CELL);
     }
 
-    moveTreasure(x, y) {
-        console.log('treasure x: ', x)
-        console.log('treasure y: ', y)
-        console.log('row: ', this.row)
-        console.log('col: ', this. col)
+    moveTreasure(y, x) {
         this.row -= y;
         this.col -= x;
-        console.log('treasure x: ', x)
-        console.log('treasure y: ', y)
     }
 
     removeTreasure() {
