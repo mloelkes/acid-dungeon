@@ -1,11 +1,13 @@
 class Game {
     constructor() {
-        this.startSound = document.getElementById("start-sound");
-        this.findSound = document.getElementById("find-sound");
+        this.startSound = document.getElementById('start-sound');
+        this.findSound = document.getElementById('find-sound');
+        this.backgroundMusic = document.getElementById('background-music')
         this.map = this.createMap();
         this.wall = new Wall();
         this.treasure = new Treasure('../assets/icons/FFICO032.PNG');
         this.player = new Player(this.map, this.treasure);
+        this.backgroundMusic.play();
     }
 
     preload() {
