@@ -46,7 +46,12 @@ body {
 }
 
 #canvas {
+    background-color:brown;
+    border: 3px solid yellow;
+}
 
+footer {
+    height: 30px;
 }
 
 #start-sound { 

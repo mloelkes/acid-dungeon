@@ -9,7 +9,7 @@ class Game {
         // objects
         this.card = new Card();
         this.wall = new Wall(this.card);
-        this.treasure = this.createTreasure('../assets/icons/FFICO032.PNG', 20, 28);
+        this.treasure = this.createTreasure('../assets/icons/FFICO032.PNG', 21, 31);
         this.player = new Player(this.card, this.treasure, this.wall);
     }
 

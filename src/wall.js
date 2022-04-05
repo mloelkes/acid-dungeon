@@ -1,7 +1,7 @@
 class Wall {
     constructor(card) {
         this.card = card;
-        this.image = '../assets/redbrick.bmp';
+        this.image;
         this.row = this.card.startY;
         this.col = this.card.startX;
     }
