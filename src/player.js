@@ -1,10 +1,11 @@
 class Player {
-    constructor(map, treasure) {
+    constructor(map, treasure, wall) {
 
         this.map = map;
         this.treasure = treasure;
-        this.col = 288;
-        this.row = 288;
+        this.wall = wall;
+        this.col = 9;
+        this.row = 9;
         this.image = '../assets/icons/MORIC023.PNG';
         this.points = 0;
 
@@ -17,12 +18,18 @@ class Player {
     }
 
     draw() {
-        image(this.image, this.col, this.row, CELL, CELL);
+        image(this.image, this.col * CELL, this.row * CELL, CELL, CELL);
     }
 
     moveUp() {
         if (this.moveUpPossible) {
-            this.row -= CELL;
+
+            if (this.row > 2) {
+                this.row -= 1;
+
+            } else {
+                this.moveElements(0, -1);
+            }
 
             this.checkPossibleMoves();
             this.collide();
@@ -31,7 +38,13 @@ class Player {
 
     moveDown() {
         if (this.moveDownPossible) {
-            this.row += CELL;
+
+            if (this.row < 17) {
+                this.row += 1;
+
+            } else {
+                this.moveElements(0, 1);
+            }
 
             this.checkPossibleMoves();
             this.collide();
@@ -40,7 +53,13 @@ class Player {
 
     moveLeft() {
         if (this.moveLeftPossible) {
-            this.col -= CELL;
+
+            if (this.col > 2) {
+                this.col -= 1;
+
+            } else {
+                this.moveElements(-1, 0);
+            }
 
             this.checkPossibleMoves();
             this.collide();
@@ -48,9 +67,15 @@ class Player {
     }
 
     moveRight() {
-        console
+        
         if (this.moveRightPossible) {
-            this.col += CELL;
+
+            if (this.col < 17) {
+                this.col += 1;
+
+            } else {
+                this.moveElements(1, 0);
+            }
 
             this.checkPossibleMoves();
             this.collide();
@@ -58,14 +83,14 @@ class Player {
     }
 
     checkPossibleMoves() {
-        this.moveUpPossible = this.map[this.row / CELL - 1][this.col / CELL] === 'path';
-        this.moveDownPossible = this.map[this.row / CELL + 1][this.col / CELL] === 'path';
-        this.moveLeftPossible = this.map[this.row / CELL][this.col / CELL - 1] === 'path';
-        this.moveRightPossible = this.map[this.row / CELL][this.col / CELL + 1] === 'path';
+        this.moveUpPossible = this.map[(this.row + this.wall.col - 1)][this.col + this.wall.row] === 'path';
+        this.moveDownPossible = this.map[(this.row + this.wall.col + 1)][this.col + this.wall.row] === 'path';
+        this.moveLeftPossible = this.map[this.row + this.wall.col][(this.col + this.wall.row - 1)] === 'path';
+        this.moveRightPossible = this.map[this.row + this.wall.col][(this.col + this.wall.row + 1)] === 'path';
   }
 
   collide() {
-        if (dist(this.col, this.row, this.treasure.col, this.treasure.row) < 32) {
+        if (dist(this.col, this.row, this.treasure.col, this.treasure.row) < 1) {
             this.treasure.removeTreasure();
             this.incrementCounter();
             this.playSound('find-sound')
@@ -74,12 +99,24 @@ class Player {
 
     incrementCounter() {
         this.points += 100;
-        console.log(COUNTER);
         COUNTER.innerHTML = this.points;
     }
 
     playSound(soundId) {
         let soundElement = document.getElementById(soundId);
         soundElement.play();
+    }
+
+    moveElements(x, y) {
+        this.moveWall(x, y);
+        this.moveTreasure(x, y);
+    }
+
+    moveWall(x, y) {
+        this.wall.moveWall(x, y);
+    }
+
+    moveTreasure(x, y) {
+        this.treasure.moveTreasure(x, y);
     }
 }

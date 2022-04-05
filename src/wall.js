@@ -1,15 +1,24 @@
 class Wall {
-    constructor() {
+    constructor(map) {
+        this.map = map;
         this.image = '../assets/redbrick.bmp';
+        this.col = 20;
+        this.row = 20;
     }
 
     draw() {
-        for (let i = 0; i < game.map.length; i++) {
-            for (let j = 0; j < game.map[i].length; j++) {
-                if (game.map[i][j] === 'wall') {
-                    image(this.image, j * CELL, i * CELL, CELL, CELL);
+        for (let y = this.col; y < this.col + 20; y++) {
+            for (let x = this.row; x < this.row + 20; x++) {
+                if (this.map[y][x] === 'wall') {
+                    image(this.image, (x - this.row) * CELL, (y - this.col) * CELL, CELL, CELL);
                 }
             }
         }
+    }
+
+    moveWall(x, y) {
+        this.col += y;
+        this.row += x;
+        this.draw();
     }
 }
