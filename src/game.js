@@ -7,7 +7,7 @@ class Game {
         this.wall = new Wall();
         this.treasure = new Treasure('../assets/icons/FFICO032.PNG');
         this.player = new Player(this.map, this.treasure);
-        this.backgroundMusic.play();
+        //this.backgroundMusic.play();
     }
 
     preload() {
