@@ -7,7 +7,7 @@ class Treasure {
     }
 
     draw() {
-        image(this.image, this.col * 32, this.row * 32, CELL, CELL);
+        image(this.image, this.col * CELL, this.row * CELL, CELL, CELL);
     }
 
     moveTreasure(y, x) {
@@ -16,7 +16,7 @@ class Treasure {
     }
 
     removeTreasure() {
-        this.col = -1;
-        this.row = -1;
+        this.col = -20;
+        this.row = -20;
     }
 }

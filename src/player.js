@@ -1,8 +1,8 @@
 class Player {
-    constructor(card, treasure, wall) {
+    constructor(card, treasures, wall) {
 
         this.card = card;
-        this.treasure = treasure;
+        this.treasures = treasures;
         this.wall = wall;
         this.col = 9;
         this.row = 9;
@@ -30,7 +30,7 @@ class Player {
             } else {
                 this.moveIndex(-1, 0);
                 this.moveWall();
-                this.moveTreasure(-1, 0);
+                this.moveTreasures(-1, 0);
             }
 
             this.checkPossibleMoves();
@@ -47,7 +47,7 @@ class Player {
             } else {
                 this.moveIndex(1, 0);
                 this.moveWall();
-                this.moveTreasure(1, 0);
+                this.moveTreasures(1, 0);
             }
 
             this.checkPossibleMoves();
@@ -64,7 +64,7 @@ class Player {
             } else {
                 this.moveIndex(0, -1);
                 this.moveWall();
-                this.moveTreasure(0, -1);
+                this.moveTreasures(0, -1);
             }
 
             this.checkPossibleMoves();
@@ -81,7 +81,7 @@ class Player {
             } else {
                 this.moveIndex(0, 1);
                 this.moveWall();
-                this.moveTreasure(0, 1);
+                this.moveTreasures(0, 1);
             }
 
             this.checkPossibleMoves();
@@ -94,13 +94,15 @@ class Player {
         this.moveDownPossible = this.card.index[(this.row + this.card.startY + 1)][this.col + this.card.startX] === 'path';
         this.moveLeftPossible = this.card.index[this.row + this.card.startY][(this.col + this.card.startX - 1)] === 'path';
         this.moveRightPossible = this.card.index[this.row + this.card.startY][(this.col + this.card.startX + 1)] === 'path';
-  }
+    }
 
-  collide() {
-        if (dist(this.col, this.row, this.treasure.col, this.treasure.row) < 1) {
-            this.treasure.removeTreasure();
-            this.incrementCounter();
-            this.playSound('find-sound')
+    collide() {
+        for (let treasure of this.treasures) {
+            if (dist(this.col, this.row, treasure.col, treasure.row) < 1) {
+                treasure.removeTreasure();
+                this.incrementCounter();
+                this.playSound('find-sound')
+            }
         }
     }
 
@@ -123,7 +125,9 @@ class Player {
         this.wall.moveWall();
     }
 
-    moveTreasure(y, x) {
-        this.treasure.moveTreasure(y, x);
+    moveTreasures(y, x) {
+        for (let treasure of this.treasures) {
+            treasure.moveTreasure(y, x);
+        }
     }
 }

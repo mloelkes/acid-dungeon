@@ -36,4 +36,5 @@ function keyPressed(event) {
     }
 
     game.draw();
+    console.log('position: ', {'row: ' : game.player.row + game.card.startY, 'col: ' : game.player.col + game.card.startX})
 }
