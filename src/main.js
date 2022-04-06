@@ -7,34 +7,43 @@ function preload() {
 function setup() {
     let canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent("canvas");
+    this.preventScrolling();
 }
 
 function draw() {
     game.draw();
-    noLoop();
+    this.checkIfKeyPressed();
 }
 
-function keyPressed(event) {
-    if (keyCode === 39) {
-        event.preventDefault();
-        game.player.moveRight(1);
-    }
+function preventScrolling() {
+    document.addEventListener('keydown', function(event) {
+        switch (event.key) {
+            case 'ArrowLeft':
+            case 'ArrowRight':
+            case 'ArrowUp':
+            case 'ArrowDown':
+                event.preventDefault();
+                break;
+        }
+    })
+}
 
-    if (keyCode === 37) {
-        event.preventDefault();
-        game.player.moveLeft(1);
-    }
+function checkIfKeyPressed() {
+    if (frameCount % 4 === 0) {
+        if (keyIsDown(UP_ARROW)) {
+            game.player.moveUp(1);
+        }
 
-    if (keyCode === 38) {
-        event.preventDefault();
-        game.player.moveUp(1);
-    }
+        if (keyIsDown(DOWN_ARROW)) {
+            game.player.moveDown(1);
+        }
 
-    if (keyCode === 40) {
-        event.preventDefault();
-        game.player.moveDown(1);
-    }
+        if (keyIsDown(LEFT_ARROW)) {
+            game.player.moveLeft(1);
+        }
 
-    game.draw();
-    console.log('position: ', {'row: ' : game.player.row + game.card.startY, 'col: ' : game.player.col + game.card.startX})
+        if (keyIsDown(RIGHT_ARROW)) {
+            game.player.moveRight(1);
+        }
+    }
 }
