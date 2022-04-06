@@ -1,9 +1,11 @@
 class Game {
     constructor() {
         // sounds
-        this.startSound = document.getElementById('start-sound');
+        this.monaSound = document.getElementById('mona-sound');
         this.findSound = document.getElementById('find-sound');
-        this.backgroundMusic = document.getElementById('background-music')
+        this.beamSound = document.getElementById('beam-sound');
+        this.backgroundMusic = document.getElementById('background-music');
+        this.house1 = document.getElementById('house-1');
         //this.backgroundMusic.play();
 
         // objects
@@ -57,36 +59,36 @@ class Game {
     createTreasures() {
         let treasures = [];
         
-        treasures.push(this.createTreasure('../assets/icons/FFICO027.PNG', 21, 31));
-        treasures.push(this.createTreasure('../assets/icons/MORIC050.PNG', 6, 26));
-        treasures.push(this.createTreasure('../assets/icons/PROGM037.PNG', 10, 9));
-        treasures.push(this.createTreasure('../assets/icons/PROGM038.PNG', 39, 22));
-        treasures.push(this.createTreasure('../assets/icons/FFICO042.PNG', 20, 55));
-        treasures.push(this.createTreasure('../assets/icons/FFICO043.PNG', 15, 21));
-        treasures.push(this.createTreasure('../assets/icons/MORIC001.PNG', 51, 14));
-        treasures.push(this.createTreasure('../assets/icons/PROGM040.PNG', 18, 58));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 55, 36));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 5, 37));
-        treasures.push(this.createTreasure('../assets/gifs/new.gif', 29, 44));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 26, 17));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 57, 6));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 40, 14));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 53, 53));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 36, 38));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 24, 48));
-        treasures.push(this.createTreasure('../assets/icons/PROGM024', 18, 4));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 2, 28));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 22, 2));
-        treasures.push(this.createTreasure('../assets/icons/PROGM040.PNG', 13, 55));
-        treasures.push(this.createTreasure('../assets/icons/PROGM041.PNG', 42, 5));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 36, 35));
-        treasures.push(this.createTreasure('../assets/icons/PROGM014.PNG', 33, 28));
-        treasures.push(this.createTreasure('../assets/icons/PROGM041.PNG', 46, 27));
+        treasures.push(this.createTreasure('treasure', '../assets/icons/FFICO027.PNG', 21, 31));
+        treasures.push(this.createTreasure('treasure', '../assets/icons/MORIC050.PNG', 6, 26));
+        treasures.push(this.createTreasure('treasure', '../assets/icons/PROGM037.PNG', 10, 9));
+        treasures.push(this.createTreasure('treasure', '../assets/icons/PROGM038.PNG', 39, 22));
+        treasures.push(this.createTreasure('treasure', '../assets/icons/FFICO042.PNG', 20, 55));
+        treasures.push(this.createTreasure('treasure', '../assets/icons/FFICO043.PNG', 15, 21));
+        treasures.push(this.createTreasure('treasure', '../assets/icons/MORIC001.PNG', 51, 14));
+        treasures.push(this.createTreasure('left-1', '../assets/icons/PROGM040.PNG', 18, 58));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 55, 36));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 5, 37));
+        treasures.push(this.createTreasure('treasure', '../assets/gifs/new.gif', 29, 44));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 26, 17));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 57, 6));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 40, 14));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 53, 53));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 36, 38));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 24, 48));
+        treasures.push(this.createTreasure('mona', '../assets/icons/PROGM024', 18, 4));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 2, 28));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 22, 2));
+        treasures.push(this.createTreasure('left-2', '../assets/icons/PROGM040.PNG', 13, 55));
+        treasures.push(this.createTreasure('right-1', '../assets/icons/PROGM041.PNG', 42, 5));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 36, 35));
+        treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 33, 28));
+        treasures.push(this.createTreasure('right-2', '../assets/icons/PROGM041.PNG', 46, 27));
 
         return treasures;
     }
 
-    createTreasure(image, y, x) {
-        return new Treasure(image, y, x, this.card);
+    createTreasure(name, image, y, x) {
+        return new Treasure(name, image, y, x, this.card);
     }
 }

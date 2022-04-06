@@ -1,5 +1,6 @@
 class Treasure {
-    constructor(image, y, x, card) {
+    constructor(name, image, y, x, card) {
+        this.name = name;
         this.card = card;
         this.row = y - this.card.startY;
         this.col = x - this.card.startX;

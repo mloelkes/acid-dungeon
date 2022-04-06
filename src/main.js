@@ -17,22 +17,22 @@ function draw() {
 function keyPressed(event) {
     if (keyCode === 39) {
         event.preventDefault();
-        game.player.moveRight();
+        game.player.moveRight(1);
     }
 
     if (keyCode === 37) {
         event.preventDefault();
-        game.player.moveLeft();
+        game.player.moveLeft(1);
     }
 
     if (keyCode === 38) {
         event.preventDefault();
-        game.player.moveUp();
+        game.player.moveUp(1);
     }
 
     if (keyCode === 40) {
         event.preventDefault();
-        game.player.moveDown();
+        game.player.moveDown(1);
     }
 
     game.draw();

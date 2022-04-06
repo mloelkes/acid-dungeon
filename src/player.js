@@ -4,10 +4,12 @@ class Player {
         this.card = card;
         this.treasures = treasures;
         this.wall = wall;
-        this.col = 9;
         this.row = 9;
+        this.col = 9;
         this.image = '../assets/icons/MORIC023.PNG';
         this.points = 0;
+        this.monaFound = false;
+        this.houseCounter = 1;
 
         this.moveUpPossible = false;
         this.moveDownPossible = false;
@@ -21,16 +23,16 @@ class Player {
         image(this.image, this.col * CELL, this.row * CELL, CELL, CELL);
     }
 
-    moveUp() {
+    moveUp(count) {
         if (this.moveUpPossible) {
 
             if (this.row > 2) {
-                this.row -= 1;
+                this.row -= count;
 
             } else {
-                this.moveIndex(-1, 0);
+                this.moveIndex(-count, 0);
                 this.moveWall();
-                this.moveTreasures(-1, 0);
+                this.moveTreasures(-count, 0);
             }
 
             this.checkPossibleMoves();
@@ -38,16 +40,16 @@ class Player {
         }
     }
 
-    moveDown() {
+    moveDown(count) {
         if (this.moveDownPossible) {
 
             if (this.row < 17) {
-                this.row += 1;
+                this.row += count;
 
             } else {
-                this.moveIndex(1, 0);
+                this.moveIndex(count, 0);
                 this.moveWall();
-                this.moveTreasures(1, 0);
+                this.moveTreasures(count, 0);
             }
 
             this.checkPossibleMoves();
@@ -55,16 +57,16 @@ class Player {
         }
     }
 
-    moveLeft() {
+    moveLeft(count) {
         if (this.moveLeftPossible) {
 
             if (this.col > 2) {
-                this.col -= 1;
+                this.col -= count;
 
             } else {
-                this.moveIndex(0, -1);
+                this.moveIndex(0, -count);
                 this.moveWall();
-                this.moveTreasures(0, -1);
+                this.moveTreasures(0, -count);
             }
 
             this.checkPossibleMoves();
@@ -72,21 +74,31 @@ class Player {
         }
     }
 
-    moveRight() {
+    moveRight(count) {
         if (this.moveRightPossible) {
 
             if (this.col < 17) {
-                this.col += 1;
+                this.col += count;
 
             } else {
-                this.moveIndex(0, 1);
+                this.moveIndex(0, count);
                 this.moveWall();
-                this.moveTreasures(0, 1);
+                this.moveTreasures(0, count);
             }
 
             this.checkPossibleMoves();
             this.collide();
         }
+    }
+
+    beam(playerY, playerX, cardY, cardX) {
+        this.row = playerY;
+        this.col = playerX;
+
+        this.moveIndex(cardY, cardX);
+        this.moveWall();
+        this.moveTreasures(cardY, cardX);
+        this.checkPossibleMoves();
     }
 
     checkPossibleMoves() {
@@ -99,9 +111,49 @@ class Player {
     collide() {
         for (let treasure of this.treasures) {
             if (dist(this.col, this.row, treasure.col, treasure.row) < 1) {
-                treasure.removeTreasure();
-                this.incrementCounter();
-                this.playSound('find-sound')
+
+                switch (treasure.name) {
+                    case 'mona':
+                        this.monaFound = true;
+                        treasure.removeTreasure();
+                        this.playSound('mona-sound');
+                        break;
+
+                    case 'left-1':
+                        this.beam(8, 8, 0, -8);
+                        treasure.removeTreasure();
+                        this.playSound('beam-sound');
+                        break;
+
+                    case 'left-2':
+                        this.beam(3, 8, 4, -10);
+                        treasure.removeTreasure();
+                        this.playSound('beam-sound');
+                        break;
+
+                    case 'right-1':
+                        this.beam(7, 8, -2, 14);
+                        treasure.removeTreasure();
+                        this.playSound('beam-sound');
+                        break;
+
+                    case 'right-2':
+                        this.beam(3, 9, 4, 12);
+                        treasure.removeTreasure();
+                        this.playSound('beam-sound');
+                        break;
+                    
+                    case 'cd':
+                        this.playMusic(this.houseCounter);
+                        this.incrementHouseCounter();
+                        break;
+
+                    case 'treasure':
+                        treasure.removeTreasure();
+                        this.incrementCounter();
+                        this.playSound('find-sound');
+                        break;
+                }
             }
         }
     }
@@ -109,6 +161,22 @@ class Player {
     incrementCounter() {
         this.points += 100;
         COUNTER.innerHTML = this.points;
+    }
+
+    incrementHouseCounter() {
+        if(this.houseCounter < 8) {
+            this.houseCounter++;
+        } else {
+            this.houseCounter = 1;
+        }
+    }
+
+    playMusic(soundId) {
+        if (soundId > 1) {
+            document.getElementById(`house-${this.houseCounter - 1}`).pause();
+        }
+
+        document.getElementById(`house-${this.houseCounter}`).play();
     }
 
     playSound(soundId) {
@@ -119,6 +187,8 @@ class Player {
     moveIndex(y, x) {
         this.card.startX += x;
         this.card.startY += y;
+        console.log('x: ', this.card.startX);
+        console.log('y: ', this.card.startY);
     }
 
     moveWall() {
