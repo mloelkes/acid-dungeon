@@ -43,6 +43,7 @@ class Game {
         this.treasures[22].image = loadImage('../assets/icons/PROGM014.PNG');
         this.treasures[23].image = loadImage('../assets/icons/PROGM014.PNG');
         this.treasures[24].image = loadImage('../assets/icons/PROGM041.PNG');
+        this.treasures[25].image = loadImage('../assets/icons/PROGM045.PNG');
     }
 
     draw() {
@@ -84,6 +85,7 @@ class Game {
         treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 36, 35));
         treasures.push(this.createTreasure('cd', '../assets/icons/PROGM014.PNG', 33, 28));
         treasures.push(this.createTreasure('right-2', '../assets/icons/PROGM041.PNG', 46, 27));
+        treasures.push(this.createTreasure('exit', '../assets/icons/PROGM045.PNG', 31, 59));
 
         return treasures;
     }

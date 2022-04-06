@@ -17,6 +17,7 @@ class Player {
         this.moveRightPossible = false;
 
         this.checkPossibleMoves();
+        this.createMonaMessage('Before you can enter the club, you have to find the Mona Lisa!');
     }
 
     draw() {
@@ -105,7 +106,7 @@ class Player {
         this.moveUpPossible = this.card.index[(this.row + this.card.startY - 1)][this.col + this.card.startX] === 'path';
         this.moveDownPossible = this.card.index[(this.row + this.card.startY + 1)][this.col + this.card.startX] === 'path';
         this.moveLeftPossible = this.card.index[this.row + this.card.startY][(this.col + this.card.startX - 1)] === 'path';
-        this.moveRightPossible = this.card.index[this.row + this.card.startY][(this.col + this.card.startX + 1)] === 'path';
+        this.moveRightPossible = (this.card.index[this.row + this.card.startY][(this.col + this.card.startX + 1)] === 'path') && this.checkIfExitPossible();
     }
 
     collide() {
@@ -115,6 +116,7 @@ class Player {
                 switch (treasure.name) {
                     case 'mona':
                         this.monaFound = true;
+                        this.createMonaMessage('You found the Mona Lisa! Now you can leave the Acid Dungeon!');
                         treasure.removeTreasure();
                         this.playSound('mona-sound');
                         break;
@@ -146,6 +148,11 @@ class Player {
                     case 'cd':
                         this.playMusic(this.houseCounter);
                         this.incrementHouseCounter();
+                        treasure.removeTreasure();
+                        break;
+
+                    case 'exit':
+                        this.exitGame();
                         break;
 
                     case 'treasure':
@@ -199,5 +206,21 @@ class Player {
         for (let treasure of this.treasures) {
             treasure.moveTreasure(y, x);
         }
+    }
+
+    createMonaMessage(message) {
+        document.getElementById('mona-message').innerHTML = message;
+    }
+
+    checkIfExitPossible() {
+        if (this.row + this.card.startY === 31 && this.col + this.card.startX === 58 && !this.monaFound) {
+            return false;
+        }
+
+        return true;
+    }
+
+    exitGame() {
+        window.open('./exit.html',"_self");
     }
 }
