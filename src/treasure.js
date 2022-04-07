@@ -17,7 +17,7 @@ class Treasure {
     }
 
     removeTreasure() {
-        this.col = -20;
-        this.row = -20;
+        this.col = -60;
+        this.row = -60;
     }
 }

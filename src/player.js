@@ -93,11 +93,12 @@ class Player {
     }
 
     beam(playerY, playerX, cardY, cardX) {
+        this.moveIndex(cardY, cardX);
+        this.moveWall();
+        
         this.row = playerY;
         this.col = playerX;
 
-        this.moveIndex(cardY, cardX);
-        this.moveWall();
         this.moveTreasures(cardY, cardX);
         this.checkPossibleMoves();
     }
@@ -107,6 +108,10 @@ class Player {
         this.moveDownPossible = this.card.index[(this.row + this.card.startY + 1)][this.col + this.card.startX] === 'path';
         this.moveLeftPossible = this.card.index[this.row + this.card.startY][(this.col + this.card.startX - 1)] === 'path';
         this.moveRightPossible = (this.card.index[this.row + this.card.startY][(this.col + this.card.startX + 1)] === 'path') && this.checkIfExitPossible();
+    }
+
+    checkCoordinateForPath(y, x) {
+        return this.moveUpPossible = this.card.index[(y + this.card.startY)][x + this.card.startX] === 'path';
     }
 
     collide() {
@@ -134,13 +139,13 @@ class Player {
                         break;
 
                     case 'right-1':
-                        this.beam(7, 8, -2, 14);
+                        this.beam(5, 8, -2, 14);
                         treasure.removeTreasure();
                         this.playSound('beam-sound');
                         break;
 
                     case 'right-2':
-                        this.beam(3, 9, 4, 12);
+                        this.beam(8, 9, 4, 12);
                         treasure.removeTreasure();
                         this.playSound('beam-sound');
                         break;
@@ -194,8 +199,6 @@ class Player {
     moveIndex(y, x) {
         this.card.startX += x;
         this.card.startY += y;
-        console.log('x: ', this.card.startX);
-        console.log('y: ', this.card.startY);
     }
 
     moveWall() {
