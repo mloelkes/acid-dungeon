@@ -1,9 +1,14 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('../assets/flock.bmp');
+    background-image: url('../assets/gifs/back121.gif');
     background-repeat: repeat;
-    color: yellow;
+    color: #ede428;
+}
+
+#cover-picture {
+    padding-top: 50px;
+    width: 500px;
 }
 
 .container {
@@ -14,48 +19,229 @@ body {
     font-size: 26px;
 }
 
-.header {
+nav {
     width: 100%;
     display: flex;
-    justify-content: space-around;
-    font-size: 28px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-shadow: 2px 3px #ff0000;
     text-decoration: underline;
+}
+
+.header {
+    width: 100%;
+    padding: 60px 0;
+    display: flex;
+   
+    font-size: 28px;
+
 }
 
 .header-left {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    font-size: 20px;
+    font-size: 26px;
+}
+
+#img-funfun {
+    width: 240px;
+    margin: 50px;
+}
+
+#img-acidpattern {
+    position: relative;
+    top: 50px;
+    width: 200px;
+    padding-right: 60px;
 }
 
 .header-center {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+}
+
+
+
+.header-center p {
+    padding: 0 12px;
 }
 
 .header-right {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 100px;
+
+}
+
+#img-acidbar {
+    position: relative;
+    width: 70px;
+    top: 30px;
+    left: 20px;
+}
+
+#img-peace {
+    position: relative;
+    bottom: 30px;
+    width: 100px;
+    left: 20px;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-left {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.header-right-counter {
-    flex: 1;
+.main-left p {
+    width: 100px;
+    height: 300px;
+    border: 10px solid rgb(160, 160, 160);
+    border-style: double;
+    padding: 30px;
+    text-align: center;
+    color: #ede428;
 }
 
-.header-right-gifs {
+.mona-bright {
+    text-decoration: underline;
+    background-image: url('../assets/Windows-98-Plus-Wallpapers-57+-images-.jpg')
+
+}
+
+.main-right {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-right-counter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100px;
+    height: 260px;
+    border: 10px solid rgb(160, 160, 160);
+    border-style: double;
+    padding: 30px;
+    text-align: center;
+    color: #905698;
+}
+
+.main-right-counter #counter {
+    font-size: 50px;
+    color: yellow;
+    font-weight: bolder;
+}
+
+.main-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
 }
 
 #canvas {
-    background-color:brown;
-    border: 3px solid yellow;
+    width: 640px;
+    height: 640px;
+    border: 10px solid rgb(160, 160, 160);
+    border-style: double;
 }
 
 footer {
-    height: 30px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 0;
+}
+
+#img-dolphin {
+    width: 400px;
+
+}
+
+.footer-row-1 {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.footer-left {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#img-trip {
+    position: relative;
+    bottom: 30px;
+}
+
+.footer-right {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+}
+
+#img-smiley {
+    position: relative;
+    bottom: 50px;
+}
+
+#img-e {
+    width: 200px;
+    position: relative;
+    right: 30px;
+    top: 40px;
+}
+
+.imprint {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    width: 800px;
+    text-align: center;
+}
+
+.imprint a {
+    color: yellow;
+    
+}
+
+.footer-row-2 {
+    display: flex;
+    justify-content: space-around;
+}
+
+#img-musica {
+    padding: 0 80px;
 }
 
 #start-sound { 

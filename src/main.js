@@ -29,7 +29,7 @@ function preventScrolling() {
 }
 
 function checkIfKeyPressed() {
-    if (frameCount % 4 === 0) {
+    if (frameCount % 5 === 0) {
         if (keyIsDown(UP_ARROW)) {
             game.player.moveUp(1);
         }

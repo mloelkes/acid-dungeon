@@ -17,7 +17,7 @@ class Player {
         this.moveRightPossible = false;
 
         this.checkPossibleMoves();
-        this.createMonaMessage('Before you can enter the club, you have to find the Mona Lisa!');
+        this.createMonaMessage('Before you can leave the Acid Dungeon, you have to steal the Mona Lisa!');
     }
 
     draw() {
@@ -122,6 +122,7 @@ class Player {
                     case 'mona':
                         this.monaFound = true;
                         this.createMonaMessage('You found the Mona Lisa! Now you can leave the Acid Dungeon!');
+                        this.changeMonaColor();
                         treasure.removeTreasure();
                         this.playSound('mona-sound');
                         break;
@@ -213,6 +214,10 @@ class Player {
 
     createMonaMessage(message) {
         document.getElementById('mona-message').innerHTML = message;
+    }
+
+    changeMonaColor() {
+        document.getElementById('mona-message').classList.add('mona-bright');
     }
 
     checkIfExitPossible() {
