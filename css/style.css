@@ -257,6 +257,9 @@ footer {
 
 .exit-container {
     padding-top: 160px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     font-size: 30px;
 }
