@@ -247,3 +247,9 @@ footer {
 #start-sound { 
     display: none;
 }
+
+.exit-container {
+    padding-top: 160px;
+    text-align: center;
+    font-size: 30px;
+}

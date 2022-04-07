@@ -229,6 +229,6 @@ class Player {
     }
 
     exitGame() {
-        window.open('./exit.html',"_self");
+        window.open('exit.html',"_self");
     }
 }
